@@ -1,0 +1,15 @@
+diff --git a/node_modules/@stoprocent/noble/lib/hci-socket/bindings.js b/node_modules/@stoprocent/noble/lib/hci-socket/bindings.js
+index 6673f5e..e088d72 100644
+--- a/node_modules/@stoprocent/noble/lib/hci-socket/bindings.js
++++ b/node_modules/@stoprocent/noble/lib/hci-socket/bindings.js
+@@ -441,7 +441,9 @@ NobleBindings.prototype.onLeConnComplete = function (
+       this.onConnectionParameterUpdateRequest.bind(this)
+     );
+ 
+-    this._gatts[handle].exchangeMtu();
++    if (!matchesCancelledConnection) {
++      this._gatts[handle].exchangeMtu();
++    }
+   } else {
+     let statusMessage = Hci.STATUS_MAPPER[status] || 'HCI Error: Unknown';
+     const errorCode = ` (0x${status.toString(16)})`;
